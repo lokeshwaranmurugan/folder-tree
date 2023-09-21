@@ -1,14 +1,21 @@
 import './App.css';
+import { useState } from 'react';
 import Folder from './components/Folder';
 import explorer from './data/folderData';
+import useTraverseTree from './hooks/useTraverseTree';
 
 function App() {
-  console.log("This is");
-  console.log(explorer);
-  console.log("Explorer Block");
+  const [explorerData, setExplorerData] = useState(explorer);
+  const {insertNode} = useTraverseTree();
+
+  const handleDataChange = (folderId, item, isFolder) => {
+      const finalTree = insertNode(explorerData, folderId, item, isFolder);
+      setExplorerData(finalTree);
+  }
+
   return (
     <div className="App">
-      <Folder explorer = {explorer}/>
+      <Folder handleDataChange = {handleDataChange} explorer = {explorerData}/>
     </div>
   );
 }

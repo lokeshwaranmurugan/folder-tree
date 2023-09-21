@@ -1,12 +1,12 @@
 import {useState} from "react";
 
-const { v4: uuidv4 } = require('uuid');
 
-export default function Folder({explorer}){
+
+export default function Folder({handleDataChange = () => {}, explorer}){
     const [expand, setExpand] = useState(false);
     const [showInput, setShowInput] = useState({
         visibile: false,
-        isFolder: null
+        isFolder: false
     });
     const expandFolder = () => {
         setExpand(!expand);
@@ -21,13 +21,7 @@ export default function Folder({explorer}){
     }
     const handleNewEntry = (e) => {
         if(e.keyCode === 13 && e.target.value){
-            explorer.items.push({
-                id: uuidv4(),
-                name: e.target.value,
-                isFolder: showInput.isFolder,
-                items: []
-            });
-            console.log(explorer);
+            handleDataChange(explorer.id, e.target.value, showInput.isFolder);
             setShowInput({...showInput,visibile:false});
         }
     }
@@ -64,7 +58,7 @@ export default function Folder({explorer}){
                 }
                 {
                     explorer.items.map((item) =>{
-                        return (<Folder explorer={item} key={item.id}/>);
+                        return (<Folder explorer={item} key={item.id} handleDataChange={handleDataChange}/>);
                     })
                 }
             </div>
