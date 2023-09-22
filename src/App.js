@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Folder from './components/Folder';
 import explorer from './data/folderData';
 import useTraverseTree from './hooks/useTraverseTree';
+import ModeSwitch from './components/ModeSwitch';
 
 function App() {
   const [explorerData, setExplorerData] = useState(explorer);
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="App">
+      <ModeSwitch />
       <Folder handleDataChange = {handleDataChange} explorer = {explorerData}/>
     </div>
   );
