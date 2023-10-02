@@ -7,6 +7,12 @@ import ModeSwitch from './components/ModeSwitch';
 
 function App() {
   const [explorerData, setExplorerData] = useState(explorer);
+  const [checked, setChecked] = useState(true);
+
+  const handleViewModeChange = (e) => {
+    setChecked(e.target.checked);
+  };
+  
   const {insertNode} = useTraverseTree();
 
   const handleDataChange = (folderId, item, isFolder) => {
@@ -16,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <ModeSwitch />
+      <ModeSwitch handleViewModeChange={handleViewModeChange} />
       <Folder handleDataChange = {handleDataChange} explorer = {explorerData}/>
     </div>
   );
