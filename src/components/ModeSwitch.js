@@ -48,8 +48,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function ModeSwitch() {
-  return (
-    <MaterialUISwitch sx={{ m: 1 }} defaultChecked />
+export default function ModeSwitch({handleViewModeChange}) {
+    return (
+    <MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={handleViewModeChange}/>
   );
 }
